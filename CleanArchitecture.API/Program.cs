@@ -1,8 +1,10 @@
 using CleanArchitecture.Infrastructure;
+using CleanArhcitecture.Application.Features.ProductFetures.Behaviours;
+using FluentValidation;
 using MediatR;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-// https://www.c-sharpcorner.com/article/clean-architecture-with-net-6-using-entity-framework/
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +17,8 @@ builder.Services.AddSwaggerGen();
 var assembly = AppDomain.CurrentDomain.Load("CleanArhcitecture.Application");
 builder.Services.AddMediatR(assembly);
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+builder.Services.AddValidatorsFromAssembly(assembly);
 
 #region Swagger
 
