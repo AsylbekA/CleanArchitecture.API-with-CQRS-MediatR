@@ -1,12 +1,8 @@
 ﻿using CleanArchitecture.Domain.Contracts;
 using CleanArchitecture.Domain.Entities;
+using CleanArhcitecture.Application.Helper.Redis;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArhcitecture.Application.Features.ProductFetures.Queries
 {
@@ -16,11 +12,28 @@ namespace CleanArhcitecture.Application.Features.ProductFetures.Queries
         public class GetProductByIdQueryHandle : IRequestHandler<GetProductByIdQuery, Product>
         {
             private readonly IApplicationContext _context;
-            public GetProductByIdQueryHandle(IApplicationContext context) => _context = context;
+            private readonly ICacheService _cache;
+            public GetProductByIdQueryHandle(IApplicationContext context, ICacheService cache)
+            {
+                _context = context;
+                _cache = cache;
+            }
 
             public async Task<Product> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
             {
-                var product = await _context.Products.Where(p => p.Id == request.Id).AsNoTracking().FirstOrDefaultAsync(cancellationToken: cancellationToken);
+                Product product;
+                var products = _cache.GetData<IEnumerable<Product>>("products");
+                if (products == null)
+                {
+                    products = await _context.Products.ToListAsync();
+                    product = products.FirstOrDefault(x => x.Id == request.Id);
+                    DateTimeOffset expirationTime = DateTimeOffset.Now.AddMinutes(15.0);
+                    _cache.SetData("products", products, expirationTime);
+
+                    return product;
+                }
+                product = products.FirstOrDefault(x => x.Id == request.Id);
+               // product = await _context.Products.Where(p => p.Id == request.Id).AsNoTracking().FirstOrDefaultAsync(cancellationToken: cancellationToken);
                 if (product is null) return null;
 
                 return product;

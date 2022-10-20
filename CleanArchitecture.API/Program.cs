@@ -1,5 +1,6 @@
 using CleanArchitecture.Infrastructure;
 using CleanArhcitecture.Application.Features.ProductFetures.Behaviours;
+using CleanArhcitecture.Application.Helper.Redis;
 using FluentValidation;
 using MediatR;
 using Microsoft.OpenApi.Models;
@@ -20,6 +21,7 @@ builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+builder.Services.AddScoped<ICacheService, CacheService>();
 
 #region Swagger
 
@@ -29,7 +31,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "CQRS.WebApi",
+        Title = "CleanArchitecture.API",
     });
 });
 #endregion
@@ -38,11 +40,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     #region Swagger
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "CQRS.WebApi");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "CleanArchitecture.API");
     });
     #endregion
 }
