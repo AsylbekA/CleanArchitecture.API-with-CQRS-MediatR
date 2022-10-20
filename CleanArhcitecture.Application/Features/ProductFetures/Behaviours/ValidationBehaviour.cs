@@ -26,18 +26,19 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
 
             _logger.LogInformation("----- Validating command {CommandType}", typeName);
 
-
             ValidationContext<TRequest> context = new ValidationContext<TRequest>(request);
             ValidationResult[] validationResults =
                 await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, cancellationToken)));
             List<ValidationFailure> failures = validationResults.SelectMany(result => result.Errors)
                 .Where(error => error != null).ToList();
+
             if (failures.Any())
             {
                 _logger.LogWarning(
                     "Validation errors - {CommandType} - Command: {@Command} - Errors: {@ValidationErrors}",
                     typeName, request, failures);
 
+                throw new ValidationException(failures);
                 //throw new CQRSSampleDomainException(
                 //    $"Command Validation Errors for type {typeof(TRequest).Name}",
                 //    new ValidationException("Validation exception", failures));

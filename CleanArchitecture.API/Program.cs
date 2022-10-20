@@ -19,12 +19,13 @@ builder.Services.AddMediatR(assembly);
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 builder.Services.AddValidatorsFromAssembly(assembly);
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
 
 #region Swagger
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
+   c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
