@@ -26,14 +26,15 @@ namespace CleanArhcitecture.Application.Features.ProductFetures.Queries
                 if (products == null)
                 {
                     products = await _context.Products.ToListAsync();
-                    product = products.FirstOrDefault(x => x.Id == request.Id);
                     DateTimeOffset expirationTime = DateTimeOffset.Now.AddMinutes(15.0);
                     _cache.SetData("products", products, expirationTime);
+
+                    product = products.FirstOrDefault(x => x.Id == request.Id);
 
                     return product;
                 }
                 product = products.FirstOrDefault(x => x.Id == request.Id);
-               // product = await _context.Products.Where(p => p.Id == request.Id).AsNoTracking().FirstOrDefaultAsync(cancellationToken: cancellationToken);
+
                 if (product is null) return null;
 
                 return product;

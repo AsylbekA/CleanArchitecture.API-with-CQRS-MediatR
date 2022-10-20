@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Domain.Contracts;
+using CleanArhcitecture.Application.Helper.Redis;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,9 +17,14 @@ public class UpdateProductCommand : IRequest<int>
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, int>
     {
         private readonly IApplicationContext _context;
+        private readonly ICacheService _cache;
 
-        public UpdateProductCommandHandler(IApplicationContext context) => _context = context;
-        public async Task<int> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public UpdateProductCommandHandler(IApplicationContext context, ICacheService cache)
+        {
+            _context = context;
+            _cache = cache;
+        }
+    public async Task<int> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var product = _context.Products.Where(p => p.Id == request.Id).AsNoTracking().FirstOrDefault();
 
@@ -31,6 +37,7 @@ public class UpdateProductCommand : IRequest<int>
             product.Description = request.Description;
 
             await _context.SaveChangesAsync();
+            _cache.RemoveData("poducts");
             return product.Id;
         }
     }

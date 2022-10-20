@@ -18,28 +18,28 @@ namespace CleanArchitecture.API.Controllers
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("CreateProduct")]
         public async Task<ActionResult> CreateProduct(CreateProductCommand command)
         {
             return Ok(await _mediatR.Send(command));
         }
 
         /// <summary>
-        /// Get All Products
+        /// Get All Product
         /// </summary>
         /// <returns></returns>
-        //[HttpGet]
-        //public async Task<ActionResult> GetAllProducts()
-        //{
-        //    return Ok(await _mediatR.Send(new GetAllProductsQuery()));
-        //}
+        [HttpGet("GetProducts")]
+        public async Task<ActionResult> GetAllProduct()
+        {
+            return Ok(await _mediatR.Send(new GetAllProductQuery()));
+        }
 
         /// <summary>
         /// Gets Product by Id
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("GetProductById{Id}")]
         public async Task<ActionResult> GetProductById(int Id)
         {
             return Ok(await _mediatR.Send(new GetProductByIdQuery { Id = Id }));
@@ -50,7 +50,7 @@ namespace CleanArchitecture.API.Controllers
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpDelete("{Id}")]
+        [HttpDelete("DeleteProduct{Id}")]
         public async Task<ActionResult> DeleteProduct(int Id)
         {
             return Ok(await _mediatR.Send(new DeleteProductCommand { Id = Id }));
@@ -62,7 +62,7 @@ namespace CleanArchitecture.API.Controllers
         /// <param name="Id"></param>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPut("{Id}")]
+        [HttpPut("UpdateProduct{Id}")]
         public async Task<ActionResult> UpdateProduct(int Id, UpdateProductCommand command)
         {
             if (Id != command.Id) return BadRequest();

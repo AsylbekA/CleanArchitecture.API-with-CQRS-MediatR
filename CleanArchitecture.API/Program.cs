@@ -41,6 +41,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+
     #region Swagger
     app.UseSwagger();
     app.UseSwaggerUI(c =>

@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Domain.Contracts;
 using CleanArchitecture.Domain.Entities;
+using CleanArhcitecture.Application.Helper.Redis;
 using MediatR;
 
 namespace CleanArhcitecture.Application.Features.ProductFetures.Commands;
@@ -15,7 +16,12 @@ public class CreateProductCommand : IRequest<int>
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
     {
         private readonly IApplicationContext _context;
-        public CreateProductCommandHandler(IApplicationContext context) => _context = context;
+        private readonly ICacheService _cache;
+        public CreateProductCommandHandler(IApplicationContext context,ICacheService cache)
+        {
+            _context = context;
+            _cache = cache;
+        }
 
         public async Task<int> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
@@ -30,6 +36,7 @@ public class CreateProductCommand : IRequest<int>
 
             await _context.Products.AddAsync(product, cancellationToken);
             await _context.SaveChangesAsync();
+            _cache.RemoveData("poducts");
             return product.Id;
         }
 
