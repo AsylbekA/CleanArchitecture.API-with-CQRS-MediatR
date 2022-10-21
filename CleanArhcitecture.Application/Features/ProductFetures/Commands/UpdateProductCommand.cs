@@ -7,7 +7,7 @@ namespace CleanArhcitecture.Application.Features.ProductFetures.Commands;
 
 public class UpdateProductCommand : IRequest<int>
 {
-    public int Id { get; set; }
+    public int Id { get; private set; }
     public string Name { get; set; }
     public decimal Price { get; set; }
     public bool IsActive { get; set; }

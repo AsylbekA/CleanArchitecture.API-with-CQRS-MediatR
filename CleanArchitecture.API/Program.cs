@@ -1,4 +1,5 @@
 using CleanArchitecture.Infrastructure;
+using CleanArhcitecture.Application.DependencyInjection;
 using CleanArhcitecture.Application.Features.ProductFetures.Behaviours;
 using CleanArhcitecture.Application.Helper.Redis;
 using FluentValidation;
@@ -18,6 +19,7 @@ builder.Services.AddSwaggerGen();
 var assembly = AppDomain.CurrentDomain.Load("CleanArhcitecture.Application");
 builder.Services.AddMediatR(assembly);
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddPersistenceApplication();
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
