@@ -36,7 +36,7 @@ public class CreateProductCommand : IRequest<int>
 
             await _context.Products.AddAsync(product, cancellationToken);
             await _context.SaveChangesAsync();
-            _cache.RemoveData("poducts");
+            _cache.RemoveData(CacheKeysRef.products);
             return product.Id;
         }
 

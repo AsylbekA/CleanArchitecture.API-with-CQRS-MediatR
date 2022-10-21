@@ -9,6 +9,6 @@ public class CreateProductCommndValidator:AbstractValidator<CreateProductCommand
     {
         RuleFor(c => c.Barcode).NotEmpty();
         RuleFor(c => c.Name).NotEmpty();
-        RuleFor(c => c.Price).ScalePrecision(2, 8);
+        RuleFor(c => c.Price).NotEqual(0).ScalePrecision(2, 8);
     }
 }

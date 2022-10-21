@@ -25,7 +25,7 @@ public class DeleteProductCommand : IRequest<int>
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
-            _cache.RemoveData("poducts");
+            _cache.RemoveData(CacheKeysRef.products);
             return product.Id;
         }
     }

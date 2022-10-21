@@ -37,7 +37,7 @@ public class UpdateProductCommand : IRequest<int>
             product.Description = request.Description;
 
             await _context.SaveChangesAsync();
-            _cache.RemoveData("poducts");
+            _cache.RemoveData(CacheKeysRef.products);
             return product.Id;
         }
     }

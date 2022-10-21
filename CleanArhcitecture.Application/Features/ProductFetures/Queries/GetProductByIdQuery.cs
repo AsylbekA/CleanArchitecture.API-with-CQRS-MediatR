@@ -22,17 +22,18 @@ namespace CleanArhcitecture.Application.Features.ProductFetures.Queries
             public async Task<Product> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
             {
                 Product product;
-                var products = _cache.GetData<IEnumerable<Product>>("products");
+                var products = _cache.GetData<IEnumerable<Product>>(CacheKeysRef.products);
                 if (products == null)
                 {
                     products = await _context.Products.ToListAsync();
                     DateTimeOffset expirationTime = DateTimeOffset.Now.AddMinutes(15.0);
-                    _cache.SetData("products", products, expirationTime);
-
+                    _cache.SetData(CacheKeysRef.products, products, expirationTime);
                     product = products.FirstOrDefault(x => x.Id == request.Id);
 
                     return product;
                 }
+               var ss= typeof(Product);
+
                 product = products.FirstOrDefault(x => x.Id == request.Id);
 
                 if (product is null) return null;

@@ -19,7 +19,7 @@ public class GetAllProductQuery : IRequest<IEnumerable<Product>>
         }
         public async Task<IEnumerable<Product>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
         {
-            var products = _cache.GetData<IEnumerable<Product>>("products");
+            var products = _cache.GetData<IEnumerable<Product>>(CacheKeysRef.products);
 
             if (products != null) return products;
 
@@ -28,7 +28,7 @@ public class GetAllProductQuery : IRequest<IEnumerable<Product>>
             if (products is null) return null;
 
             DateTimeOffset expirationTime = DateTimeOffset.Now.AddMinutes(15.0);
-            _cache.SetData("products", products, expirationTime);
+            _cache.SetData(CacheKeysRef.products, products, expirationTime);
 
             return products;
         }

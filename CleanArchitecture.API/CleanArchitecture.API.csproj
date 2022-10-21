@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>F:\Asulbek\SelfProjects\CleanArchitecture.API-with-CQRS-MediatR\CleanArchitecture.API\bin\CleanArchitecture.API.xml</DocumentationFile>
+    <DocumentationFile>G:\Work\CleanArchitecture.API\CleanArchitecture.API\bin\CleanArchitecture.API.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
