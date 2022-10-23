@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.API", "CleanArchitecture.API\CleanArchitecture.API.csproj", "{3F4BFD1F-9AD6-48A4-BF4F-FC3F44847A6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitecture.API", "CleanArchitecture.API\CleanArchitecture.API.csproj", "{3F4BFD1F-9AD6-48A4-BF4F-FC3F44847A6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArhcitecture.Application", "CleanArhcitecture.Application\CleanArhcitecture.Application.csproj", "{EC5ADF84-2734-4D10-B545-58B6135413D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArhcitecture.Application", "CleanArhcitecture.Application\CleanArhcitecture.Application.csproj", "{EC5ADF84-2734-4D10-B545-58B6135413D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Domain", "CleanArchitecture.Domain\CleanArchitecture.Domain.csproj", "{B8643C83-FBD1-41DE-99E7-6FAE53561067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitecture.Domain", "CleanArchitecture.Domain\CleanArchitecture.Domain.csproj", "{B8643C83-FBD1-41DE-99E7-6FAE53561067}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Infrastructure", "CleanArchitecture.Infrastructure\CleanArchitecture.Infrastructure.csproj", "{53B69FF7-A2FF-40E9-BF4E-5B683D947505}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitecture.Infrastructure", "CleanArchitecture.Infrastructure\CleanArchitecture.Infrastructure.csproj", "{53B69FF7-A2FF-40E9-BF4E-5B683D947505}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{76792DEE-59DF-4A2F-9A91-BAF0B9BF76A0}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,6 +21,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructura", "Infrastructura", "{093CE194-63EC-4722-968B-F92D21E2D14B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{E4ADBD44-AA87-4162-AF28-387124FD5B50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{EC7CDE81-5947-400E-AB18-C43F3ADD3820}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product.Microservice", "Product.Microservice", "{C6701318-4E9E-4BD4-910D-AF71001BA4E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,11 @@ Global
 		{EC5ADF84-2734-4D10-B545-58B6135413D3} = {87404C8F-0B57-49DF-A979-7C47AE1A6B90}
 		{B8643C83-FBD1-41DE-99E7-6FAE53561067} = {87404C8F-0B57-49DF-A979-7C47AE1A6B90}
 		{53B69FF7-A2FF-40E9-BF4E-5B683D947505} = {093CE194-63EC-4722-968B-F92D21E2D14B}
+		{76792DEE-59DF-4A2F-9A91-BAF0B9BF76A0} = {C6701318-4E9E-4BD4-910D-AF71001BA4E8}
+		{87404C8F-0B57-49DF-A979-7C47AE1A6B90} = {C6701318-4E9E-4BD4-910D-AF71001BA4E8}
+		{093CE194-63EC-4722-968B-F92D21E2D14B} = {C6701318-4E9E-4BD4-910D-AF71001BA4E8}
+		{E4ADBD44-AA87-4162-AF28-387124FD5B50} = {C6701318-4E9E-4BD4-910D-AF71001BA4E8}
+		{C6701318-4E9E-4BD4-910D-AF71001BA4E8} = {EC7CDE81-5947-400E-AB18-C43F3ADD3820}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26703EE8-43D5-4658-BEB8-5ECD73168F54}
