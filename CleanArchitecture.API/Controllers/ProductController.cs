@@ -39,7 +39,7 @@ namespace CleanArchitecture.API.Controllers
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpGet("GetProductById{Id}")]
+        [HttpGet("GetProductById/{Id}")]
         public async Task<ActionResult> GetProductById(int Id)
         {
             return Ok(await _mediatR.Send(new GetProductByIdQuery { Id = Id }));
@@ -50,7 +50,7 @@ namespace CleanArchitecture.API.Controllers
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpDelete("DeleteProduct{Id}")]
+        [HttpDelete("DeleteProduct/{Id}")]
         public async Task<ActionResult> DeleteProduct(int Id)
         {
             return Ok(await _mediatR.Send(new DeleteProductCommand { Id = Id }));
@@ -62,7 +62,7 @@ namespace CleanArchitecture.API.Controllers
         /// <param name="Id"></param>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPut("UpdateProduct{Id}")]
+        [HttpPut("UpdateProduct/{Id}")]
         public async Task<ActionResult> UpdateProduct(int Id, UpdateProductCommand command)
         {
             if (Id != command.Id) return BadRequest();
